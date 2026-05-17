@@ -122,7 +122,7 @@ st.sidebar.caption("首次运行会下载 torchvision 预训练权重；Streamli
 left, right = st.columns([0.92, 1.08])
 with left:
     st.subheader("输入图片")
-    st.image(image, caption=f"{image_name} | {image.width} x {image.height}", use_column_width=True)
+    st.image(image, caption=f"{image_name} | {image.width} x {image.height}", width="stretch")
 
 score_threshold = 0.45
 mask_threshold = 0.5
@@ -132,7 +132,7 @@ if method == "FCN 语义分割":
         st.subheader("FCN 语义分割结果")
         with st.spinner("正在运行 FCN-ResNet50..."):
             result = run_fcn_segmentation(image)
-        st.image(result.overlay, caption=f"耗时 {result.elapsed_ms:.1f} ms", use_column_width=True)
+        st.image(result.overlay, caption=f"耗时 {result.elapsed_ms:.1f} ms", width="stretch")
         stats = class_stats_to_frame(result.class_stats)
         if stats.empty:
             st.info("没有识别到非背景语义类别。")
@@ -151,7 +151,7 @@ elif method == "R-CNN 目标检测（简化示例）":
                 score_threshold=score_threshold,
                 max_regions=max_regions,
             )
-        st.image(result.visualization, caption=f"耗时 {result.elapsed_ms:.1f} ms", use_column_width=True)
+        st.image(result.visualization, caption=f"耗时 {result.elapsed_ms:.1f} ms", width="stretch")
         show_detection_table(result.detections)
 
 elif method == "Fast R-CNN 目标检测（RoI Head 示例）":
@@ -161,7 +161,7 @@ elif method == "Fast R-CNN 目标检测（RoI Head 示例）":
         st.caption("外部候选区域 + 共享 backbone 特征 + Faster R-CNN 的 RoI Head，不启用 RPN。")
         with st.spinner("正在运行共享特征与 RoI Head..."):
             result = run_fast_rcnn_style(image, score_threshold=score_threshold)
-        st.image(result.visualization, caption=f"耗时 {result.elapsed_ms:.1f} ms", use_column_width=True)
+        st.image(result.visualization, caption=f"耗时 {result.elapsed_ms:.1f} ms", width="stretch")
         show_detection_table(result.detections)
 
 elif method == "Faster R-CNN 目标检测":
@@ -170,7 +170,7 @@ elif method == "Faster R-CNN 目标检测":
         st.subheader("Faster R-CNN 结果")
         with st.spinner("正在运行 RPN + RoI Head..."):
             result = run_faster_rcnn(image, score_threshold=score_threshold)
-        st.image(result.visualization, caption=f"耗时 {result.elapsed_ms:.1f} ms", use_column_width=True)
+        st.image(result.visualization, caption=f"耗时 {result.elapsed_ms:.1f} ms", width="stretch")
         show_detection_table(result.detections)
 
 elif method == "Mask R-CNN 实例分割":
@@ -184,7 +184,7 @@ elif method == "Mask R-CNN 实例分割":
                 score_threshold=score_threshold,
                 mask_threshold=mask_threshold,
             )
-        st.image(result.visualization, caption=f"耗时 {result.elapsed_ms:.1f} ms", use_column_width=True)
+        st.image(result.visualization, caption=f"耗时 {result.elapsed_ms:.1f} ms", width="stretch")
         show_instance_table(result.instances)
 
 else:
