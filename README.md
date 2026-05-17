@@ -25,10 +25,12 @@ streamlit run app.py
 1. 将本项目上传到 GitHub。
 2. 在 Streamlit Cloud 中选择该仓库。
 3. App file 选择 `app.py`。
-4. Python 版本建议使用 `3.11`。
+4. Python 版本可以使用默认版本；当前依赖已适配 Python 3.14。若想使用旧版 PyTorch，需要删除 app 后重新部署，并在 Advanced settings 中选择 Python 3.11/3.12。
 5. 点击 Deploy。
 
 如果 Streamlit Cloud 冷启动较慢，这是 PyTorch 和预训练权重下载导致的正常现象。页面采用延迟加载：只有选择某个方法时才会加载对应模型。
+
+> 注意：Streamlit Community Cloud 的 Python 版本是在部署时的 Advanced settings 中选择的，已部署 app 不能仅靠修改仓库文件切换 Python 版本。
 
 ## 项目结构
 
